@@ -1,0 +1,359 @@
+/* tana.css : 棚卸管理アプリ専用スタイル（クラスは tana- 接頭辞で他アプリと衝突回避） */
+
+:root {
+  --tana-navy: #23405c;
+  --tana-navy-dark: #182f46;
+  --tana-ink: #26292c;
+  --tana-sub: #5c6670;
+  --tana-bg: #eef1f0;
+  --tana-panel: #ffffff;
+  --tana-line: #d4dade;
+  --tana-accent: #2e6e5e;      /* 合計・確定などの落ち着いた強調色 */
+  --tana-warn-bg: #fdf3e2;
+  --tana-warn: #9a6a12;
+  --tana-error-bg: #fbeaea;
+  --tana-error: #a83232;
+  --tana-ok-bg: #e8f2ee;
+  --tana-focus: #3a76c4;
+  --tana-radius: 8px;
+  --tana-font: "Yu Gothic UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+}
+
+#tana-app, #tana-print-root {
+  font-family: var(--tana-font);
+  color: var(--tana-ink);
+  font-size: 15px;
+  line-height: 1.6;
+}
+body.tana-body { margin: 0; padding: 0; background: var(--tana-bg); } /* 本アプリ単体ページ専用。統合先のbodyには影響しない */
+#tana-app * , #tana-print-root * { box-sizing: border-box; }
+
+/* ---------- ヘッダー ---------- */
+.tana-header { background: var(--tana-navy); color: #fff; }
+.tana-header-stripe {
+  height: 5px;
+  background: repeating-linear-gradient(-45deg,
+    #b03a3a 0 14px, #f2f2f0 14px 28px, #35597e 28px 42px); /* 理容室のサインポール調の細帯 */
+}
+.tana-header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 18px 6px; flex-wrap: wrap; gap: 6px;
+}
+.tana-title { margin: 0; font-size: 21px; font-weight: 700; letter-spacing: .04em; }
+.tana-title-sub { font-size: 13px; font-weight: 400; opacity: .8; margin-left: 6px; }
+.tana-header-right { display: flex; align-items: center; gap: 10px; }
+.tana-header-store { font-size: 13px; opacity: .9; }
+.tana-version-badge {
+  font-size: 12px; background: rgba(255,255,255,.15); border-radius: 20px; padding: 2px 10px;
+}
+.tana-tabs { display: flex; overflow-x: auto; padding: 0 10px; gap: 2px; }
+.tana-tab {
+  appearance: none; border: 0; background: transparent; color: #d8e0e8;
+  font-family: inherit; font-size: 15px; padding: 10px 16px; cursor: pointer;
+  border-radius: 8px 8px 0 0; white-space: nowrap;
+}
+.tana-tab:hover { background: rgba(255,255,255,.1); color: #fff; }
+.tana-tab.is-active { background: var(--tana-bg); color: var(--tana-navy-dark); font-weight: 700; }
+.tana-tab:focus-visible, #tana-app button:focus-visible,
+#tana-app input:focus-visible, #tana-app select:focus-visible, #tana-app textarea:focus-visible {
+  outline: 2px solid var(--tana-focus); outline-offset: 1px;
+}
+
+/* ---------- 本体 ---------- */
+.tana-main { max-width: 1240px; margin: 0 auto; padding: 16px 14px 40px; }
+.tana-panel { display: none; }
+.tana-panel.is-active { display: block; }
+
+.tana-card {
+  background: var(--tana-panel); border: 1px solid var(--tana-line);
+  border-radius: var(--tana-radius); padding: 16px; margin-bottom: 16px;
+}
+.tana-card h2 { margin: 0 0 10px; font-size: 17px; color: var(--tana-navy-dark); }
+.tana-card h3 { margin: 14px 0 8px; font-size: 15px; color: var(--tana-navy-dark); }
+
+.tana-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+.tana-toolbar .tana-spacer { flex: 1; }
+
+/* ---------- ボタン ---------- */
+.tana-btn {
+  appearance: none; font-family: inherit; font-size: 15px; cursor: pointer;
+  border: 1px solid var(--tana-line); background: #fff; color: var(--tana-ink);
+  border-radius: 6px; padding: 8px 14px; min-height: 40px;
+}
+.tana-btn:hover { background: #f4f6f7; }
+.tana-btn-primary { background: var(--tana-navy); border-color: var(--tana-navy); color: #fff; }
+.tana-btn-primary:hover { background: var(--tana-navy-dark); }
+.tana-btn-danger { background: #fff; border-color: var(--tana-error); color: var(--tana-error); }
+.tana-btn-danger:hover { background: var(--tana-error-bg); }
+.tana-btn-sm { padding: 4px 10px; min-height: 32px; font-size: 13px; }
+.tana-btn:disabled { opacity: .45; cursor: not-allowed; }
+
+/* ---------- 入力 ---------- */
+#tana-app input[type="text"], #tana-app input[type="number"], #tana-app input[type="date"],
+#tana-app select, #tana-app textarea {
+  font-family: inherit; font-size: 15px; padding: 7px 9px; min-height: 40px;
+  border: 1px solid var(--tana-line); border-radius: 6px; background: #fff; color: var(--tana-ink);
+  max-width: 100%;
+}
+#tana-app input[type="number"] { text-align: right; }
+#tana-app textarea { min-height: 70px; width: 100%; }
+.tana-field { margin-bottom: 12px; }
+.tana-field label { display: block; font-size: 13px; color: var(--tana-sub); margin-bottom: 3px; }
+.tana-field-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.tana-field-row .tana-field { flex: 1; min-width: 180px; }
+.tana-hint { font-size: 12px; color: var(--tana-sub); }
+.tana-required::after { content: "＊"; color: var(--tana-error); margin-left: 2px; }
+
+/* ---------- 表 ---------- */
+.tana-table-wrap { overflow-x: auto; border: 1px solid var(--tana-line); border-radius: var(--tana-radius); }
+.tana-table { border-collapse: collapse; width: 100%; font-size: 14px; background: #fff; }
+.tana-table th, .tana-table td {
+  border-bottom: 1px solid var(--tana-line); border-right: 1px solid #e8ecee;
+  padding: 6px 8px; text-align: left; vertical-align: middle; white-space: nowrap;
+}
+.tana-table th { background: #f1f4f5; color: var(--tana-navy-dark); position: sticky; top: 0; z-index: 2; }
+.tana-table td.tana-num, .tana-table th.tana-num { text-align: right; font-variant-numeric: tabular-nums; }
+.tana-table .tana-sticky-col { position: sticky; left: 0; background: #fff; z-index: 1; box-shadow: 2px 0 0 var(--tana-line); min-width: 150px; white-space: normal; }
+.tana-table th.tana-sticky-col { background: #f1f4f5; z-index: 3; }
+.tana-table tr:hover td { background: #fafcfc; }
+.tana-table tr:hover td.tana-sticky-col { background: #fafcfc; }
+.tana-table input[type="number"] { width: 84px; min-height: 34px; padding: 4px 6px; font-size: 14px; }
+.tana-table input[type="text"] { width: 110px; min-height: 34px; padding: 4px 6px; font-size: 14px; }
+.tana-table input[type="date"] { min-height: 34px; padding: 4px 6px; font-size: 13px; }
+.tana-table select { min-height: 34px; padding: 4px 6px; font-size: 13px; }
+.tana-amount-cell { font-weight: 700; color: var(--tana-navy-dark); }
+.tana-row-excluded td { color: #98a1a8; background: #f7f8f8; }
+.tana-row-excluded td.tana-sticky-col { background: #f7f8f8; }
+.tana-prev-ref { display: block; font-size: 11px; color: var(--tana-sub); }
+
+/* 未入力・警告の印 */
+.tana-cell-missing { background: var(--tana-warn-bg) !important; }
+.tana-badge { display: inline-block; font-size: 12px; border-radius: 12px; padding: 1px 9px; }
+.tana-badge-warn { background: var(--tana-warn-bg); color: var(--tana-warn); }
+.tana-badge-error { background: var(--tana-error-bg); color: var(--tana-error); }
+.tana-badge-ok { background: var(--tana-ok-bg); color: var(--tana-accent); }
+.tana-badge-neutral { background: #eceff1; color: var(--tana-sub); }
+.tana-badge-status-draft { background: #eceff1; color: var(--tana-sub); }
+.tana-badge-status-checked { background: #e5eef8; color: #2b5a8c; }
+.tana-badge-status-finalized { background: var(--tana-ok-bg); color: var(--tana-accent); }
+
+/* ---------- ダッシュボード ---------- */
+.tana-stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.tana-stat {
+  background: var(--tana-panel); border: 1px solid var(--tana-line); border-radius: var(--tana-radius);
+  padding: 12px 14px;
+}
+.tana-stat .tana-stat-label { font-size: 13px; color: var(--tana-sub); }
+.tana-stat .tana-stat-value { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.tana-stat-total { border-left: 5px solid var(--tana-accent); }
+.tana-stat-total .tana-stat-value { color: var(--tana-accent); font-size: 26px; }
+.tana-chart-wrap { overflow-x: auto; }
+.tana-legend { display: flex; gap: 16px; font-size: 13px; color: var(--tana-sub); margin-top: 4px; }
+.tana-legend span::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+.tana-legend .tana-leg-cur::before { background: var(--tana-navy); }
+.tana-legend .tana-leg-prev::before { background: #c3cdd4; }
+
+/* ---------- 警告一覧 ---------- */
+.tana-issues { margin: 10px 0; }
+.tana-issue { display: flex; gap: 8px; align-items: baseline; padding: 5px 10px; border-radius: 6px; margin-bottom: 4px; font-size: 14px; }
+.tana-issue-warn { background: var(--tana-warn-bg); color: var(--tana-warn); }
+.tana-issue-error { background: var(--tana-error-bg); color: var(--tana-error); }
+.tana-issue::before { font-weight: 700; }
+.tana-issue-warn::before { content: "⚠"; }
+.tana-issue-error::before { content: "✖"; }
+
+/* ---------- モーダル ---------- */
+.tana-modal-overlay {
+  position: fixed; inset: 0; background: rgba(20,30,40,.45); z-index: 100;
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.tana-modal-overlay[hidden] { display: none !important; } /* hidden属性を確実に反映 */
+.tana-modal {
+  background: #fff; border-radius: 10px; width: 640px; max-width: 100%;
+  max-height: 90vh; display: flex; flex-direction: column;
+  font-family: var(--tana-font); color: var(--tana-ink); font-size: 15px; line-height: 1.6;
+}
+.tana-modal * { box-sizing: border-box; }
+.tana-modal-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--tana-line); }
+.tana-modal-head h2 { margin: 0; font-size: 17px; color: var(--tana-navy-dark); }
+.tana-modal-close { appearance: none; border: 0; background: transparent; font-size: 22px; cursor: pointer; color: var(--tana-sub); padding: 0 6px; }
+.tana-modal-body { padding: 16px 18px; overflow-y: auto; }
+.tana-modal-body input[type="text"], .tana-modal-body input[type="number"], .tana-modal-body input[type="date"],
+.tana-modal-body select, .tana-modal-body textarea {
+  font-family: inherit; font-size: 15px; padding: 7px 9px; min-height: 40px;
+  border: 1px solid var(--tana-line); border-radius: 6px; width: 100%;
+}
+.tana-modal-body textarea { min-height: 60px; }
+.tana-modal-foot { padding: 12px 18px; border-top: 1px solid var(--tana-line); display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
+.tana-modal .tana-field { margin-bottom: 12px; }
+.tana-modal .tana-field label { display: block; font-size: 13px; color: var(--tana-sub); margin-bottom: 3px; }
+.tana-modal .tana-field-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.tana-modal .tana-field-row .tana-field { flex: 1; min-width: 160px; }
+.tana-confirm-danger { background: var(--tana-error-bg); color: var(--tana-error); border-radius: 6px; padding: 10px 12px; margin-bottom: 10px; }
+
+/* ---------- トースト ---------- */
+.tana-toast-wrap { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); z-index: 200; display: flex; flex-direction: column; gap: 8px; width: min(94vw, 560px); }
+.tana-toast {
+  background: var(--tana-navy-dark); color: #fff; border-radius: 8px; padding: 10px 16px;
+  font-family: var(--tana-font); font-size: 14px; box-shadow: 0 4px 14px rgba(0,0,0,.25); text-align: center;
+}
+.tana-toast-error { background: var(--tana-error); }
+.tana-toast-warn { background: var(--tana-warn); }
+
+/* 保存エラーの常時表示バー */
+.tana-save-error-bar {
+  position: sticky; top: 0; z-index: 50; background: var(--tana-error); color: #fff;
+  padding: 8px 14px; font-size: 14px; text-align: center;
+}
+
+/* ---------- フッター ---------- */
+.tana-footer { max-width: 1240px; margin: 0 auto; padding: 10px 14px 30px; color: var(--tana-sub); font-size: 12px; display: flex; flex-direction: column; gap: 2px; }
+
+/* ---------- 履歴 ---------- */
+.tana-history-item { border-bottom: 1px solid var(--tana-line); padding: 8px 2px; font-size: 14px; }
+.tana-history-meta { color: var(--tana-sub); font-size: 12px; }
+.tana-history-change { font-size: 13px; color: var(--tana-sub); padding-left: 12px; }
+.tana-history-change b { color: var(--tana-ink); font-weight: 600; }
+
+/* ---------- スマートフォン ---------- */
+@media (max-width: 720px) {
+  #tana-app { font-size: 15px; }
+  .tana-header-inner { padding: 10px 12px 4px; }
+  .tana-title { font-size: 18px; }
+  .tana-main { padding: 10px 8px 30px; }
+  .tana-stat .tana-stat-value { font-size: 19px; }
+  .tana-stat-total .tana-stat-value { font-size: 22px; }
+  .tana-modal { width: 100%; }
+  .tana-table { font-size: 13px; }
+  .tana-table .tana-sticky-col { min-width: 120px; }
+  .tana-btn { min-height: 42px; }
+}
+
+/* ================= 印刷 ================= */
+#tana-print-root { display: none; }
+
+@media print {
+  body.tana-body { background: #fff; }
+  #tana-app, .tana-toast-wrap, .tana-modal-overlay { display: none !important; }
+  body.tana-printing #tana-print-root { display: block; }
+
+  @page { size: A4 portrait; margin: 12mm; }
+
+  .tana-sheet { font-size: 11pt; color: #000; }
+  .tana-sheet h1 { font-size: 15pt; margin: 0 0 6pt; text-align: center; letter-spacing: .2em; }
+  .tana-sheet-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4pt; margin-bottom: 8pt; font-size: 10pt; }
+  .tana-sheet-head div { min-width: 40%; }
+  .tana-sheet table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  .tana-sheet th, .tana-sheet td { border: 1px solid #444; padding: 3pt 4pt; }
+  .tana-sheet th { background: #eee; }
+  .tana-sheet thead { display: table-header-group; }   /* ページごとの見出し（表ヘッダー繰り返し） */
+  .tana-sheet tr { page-break-inside: avoid; }
+  .tana-sheet .tana-num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tana-sheet .tana-subtotal td { background: #f3f3f3; font-weight: 700; }
+  .tana-sheet .tana-grandtotal td { background: #e6e6e6; font-weight: 700; font-size: 10.5pt; }
+  .tana-sheet .tana-sign-area { display: flex; justify-content: flex-end; gap: 20pt; margin-top: 14pt; page-break-inside: avoid; }
+  .tana-sheet .tana-sign-box { border: 1px solid #444; width: 130pt; height: 60pt; padding: 4pt; font-size: 9pt; }
+  .tana-sheet .tana-fill-cell { min-width: 50pt; }
+  .tana-sheet .tana-sheet-note { font-size: 8.5pt; color: #333; margin-top: 8pt; }
+}
+
+/* 画面上でのプレビュー表示（印刷前確認用） */
+body.tana-preview #tana-print-root {
+  display: block; background: #fff; max-width: 900px; margin: 20px auto; padding: 24px;
+  border: 1px solid var(--tana-line); box-shadow: 0 2px 10px rgba(0,0,0,.08);
+}
+body.tana-preview #tana-print-root .tana-sheet table { width: 100%; border-collapse: collapse; font-size: 13px; }
+body.tana-preview #tana-print-root .tana-sheet th, body.tana-preview #tana-print-root .tana-sheet td { border: 1px solid #555; padding: 4px 6px; }
+body.tana-preview #tana-print-root .tana-sheet h1 { text-align: center; letter-spacing: .2em; }
+body.tana-preview #tana-print-root .tana-sheet-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px; }
+body.tana-preview #tana-print-root .tana-num { text-align: right; }
+body.tana-preview #tana-print-root .tana-subtotal td { background: #f3f3f3; font-weight: 700; }
+body.tana-preview #tana-print-root .tana-grandtotal td { background: #e6e6e6; font-weight: 700; }
+body.tana-preview #tana-print-root .tana-sign-area { display: flex; justify-content: flex-end; gap: 24px; margin-top: 16px; }
+body.tana-preview #tana-print-root .tana-sign-box { border: 1px solid #555; width: 170px; height: 80px; padding: 6px; font-size: 12px; }
+.tana-preview-bar { position: sticky; top: 0; z-index: 90; background: var(--tana-navy); color: #fff; padding: 10px 16px; display: none; gap: 10px; align-items: center; }
+body.tana-preview .tana-preview-bar { display: flex; }
+@media print { .tana-preview-bar { display: none !important; } }
+
+/* ================= 追加スタイル（年度管理・出力・設定・共通） ================= */
+
+/* 見出し */
+.tana-h2 { font-size: 17px; color: var(--tana-navy-dark); margin: 0 0 10px; }
+.tana-card .tana-toolbar .tana-h2 { margin: 0; }
+
+/* フォームグリッド（設定・年度作成） */
+.tana-form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px 18px; margin-bottom: 12px; }
+.tana-form-grid label { display: block; font-size: 14px; color: var(--tana-ink); }
+.tana-form-grid label > input[type="text"], .tana-form-grid label > input[type="number"],
+.tana-form-grid label > input[type="date"], .tana-form-grid label > select {
+  display: block; width: 100%; margin-top: 3px; font-family: inherit; font-size: 15px;
+  padding: 7px 9px; min-height: 40px; border: 1px solid var(--tana-line); border-radius: 6px; box-sizing: border-box;
+}
+.tana-form-grid .tana-hint { display: block; margin-top: 2px; }
+
+/* バッジ・強調 */
+.tana-badge-sample { background: #ead9f7; color: #6b3fa0; }
+.tana-danger-text { color: var(--tana-error); font-weight: 600; }
+
+/* 一覧の操作セル */
+.tana-cell-actions { white-space: nowrap; }
+.tana-cell-actions .tana-btn { margin: 2px 4px 2px 0; }
+
+/* 年度選択 */
+.tana-year-select { font-family: inherit; font-size: 15px; padding: 6px 8px; min-height: 40px; border: 1px solid var(--tana-line); border-radius: 6px; }
+
+/* 差額の色分け（画面用） */
+.tana-diff-plus { color: #a8321f; }
+.tana-diff-minus { color: #1c6b34; }
+.tana-panel .tana-subtotal td { background: #f2f5f7; font-weight: 700; }
+.tana-panel .tana-grandtotal td { background: #e7edf2; font-weight: 700; }
+
+/* 確定できません等の一覧 */
+.tana-issue-list { margin: 8px 0; padding-left: 0; list-style: none; }
+.tana-issue-list li { padding: 5px 10px; border-radius: 6px; margin-bottom: 4px; font-size: 14px; }
+.tana-issue-list .tana-issue-error { background: var(--tana-error-bg); color: var(--tana-error); }
+.tana-issue-list .tana-issue-warn { background: var(--tana-warn-bg); color: var(--tana-warn); }
+
+/* 修正履歴 */
+.tana-hist { max-height: 480px; overflow-y: auto; border: 1px solid var(--tana-line); border-radius: 8px; padding: 4px 10px; }
+.tana-hist-item { border-bottom: 1px solid var(--tana-line); padding: 8px 2px; font-size: 14px; }
+.tana-hist-item:last-child { border-bottom: 0; }
+.tana-hist-time { color: var(--tana-sub); font-size: 12px; margin-right: 6px; }
+.tana-hist-changes { margin: 4px 0 0; padding-left: 20px; font-size: 13px; color: var(--tana-sub); }
+
+/* 出力タブ */
+.tana-out-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 14px; }
+.tana-out-box { border: 1px solid var(--tana-line); border-radius: 8px; padding: 14px; background: #fbfcfd; }
+.tana-out-box h3 { margin: 0 0 6px; font-size: 15px; color: var(--tana-navy-dark); }
+.tana-note-box { background: var(--tana-warn-bg); border-radius: 8px; padding: 12px 14px; font-size: 14px; color: #6a5410; }
+
+/* 更新履歴 */
+.tana-changelog { padding-left: 20px; font-size: 14px; }
+
+/* 確認ダイアログ本文 */
+.tana-confirm-body { font-size: 15px; }
+
+/* トーストのフェード */
+.tana-toast { opacity: 0; transform: translateY(6px); transition: opacity .25s, transform .25s; }
+.tana-toast.is-show { opacity: 1; transform: translateY(0); }
+
+/* 保存エラーバー（TANA.ui.setSaveError が生成） */
+.tana-save-error { position: sticky; top: 0; z-index: 60; background: var(--tana-error); color: #fff; padding: 8px 14px; font-size: 14px; text-align: center; }
+
+/* ---------- 帳票（印刷・プレビュー共通の部品） ---------- */
+.tana-doc-head { margin-bottom: 8pt; }
+.tana-sheet .tana-doc-meta { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin-bottom: 6pt; }
+.tana-sheet .tana-doc-meta th { background: #eee; width: 12%; text-align: left; font-weight: 600; }
+.tana-sheet .tana-doc-meta th, .tana-sheet .tana-doc-meta td { border: 1px solid #444; padding: 3pt 5pt; }
+.tana-sheet .tana-doc-blank { min-width: 40pt; height: 16pt; }
+.tana-sheet .tana-sheet-sub { font-size: 12pt; margin: 12pt 0 5pt; page-break-after: avoid; }
+.tana-sheet .tana-sign-label { font-size: 9pt; color: #333; }
+.tana-sheet .tana-sign-space { flex: 1; }
+@media print {
+  .tana-sheet table { page-break-inside: auto; }
+  .tana-sheet .tana-subtotal, .tana-sheet .tana-grandtotal, .tana-sheet .tana-sign-area { page-break-inside: avoid; }
+}
+body.tana-preview #tana-print-root .tana-doc-meta th { background: #eee; text-align: left; }
+body.tana-preview #tana-print-root .tana-doc-blank { height: 26px; }
+body.tana-preview #tana-print-root .tana-sheet-sub { margin: 18px 0 8px; }
+body.tana-preview #tana-print-root .tana-sign-label { font-size: 12px; color: #333; }
