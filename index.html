@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>理容室 棚卸管理 Ver.1.0.2</title>
+<link rel="stylesheet" href="css/tana.css">
+</head>
+<body class="tana-body">
+
+<div id="tana-app">
+  <header class="tana-header">
+    <div class="tana-header-stripe"></div>
+    <div class="tana-header-inner">
+      <h1 class="tana-title">棚卸管理 <span class="tana-title-sub">理容室用</span></h1>
+      <div class="tana-header-right">
+        <span id="tana-header-store" class="tana-header-store"></span>
+        <span class="tana-version-badge">Ver.1.0.2</span>
+      </div>
+    </div>
+    <nav class="tana-tabs" id="tana-tabs">
+      <button class="tana-tab is-active" data-tab="dashboard">ダッシュボード</button>
+      <button class="tana-tab" data-tab="input">棚卸入力</button>
+      <button class="tana-tab" data-tab="master">品目マスター</button>
+      <button class="tana-tab" data-tab="years">年度管理・履歴</button>
+      <button class="tana-tab" data-tab="output">出力</button>
+      <button class="tana-tab" data-tab="settings">設定</button>
+    </nav>
+  </header>
+
+  <main class="tana-main">
+    <section id="tana-tab-dashboard" class="tana-panel is-active"></section>
+    <section id="tana-tab-input" class="tana-panel"></section>
+    <section id="tana-tab-master" class="tana-panel"></section>
+    <section id="tana-tab-years" class="tana-panel"></section>
+    <section id="tana-tab-output" class="tana-panel"></section>
+    <section id="tana-tab-settings" class="tana-panel"></section>
+  </main>
+
+  <footer class="tana-footer">
+    <span>棚卸管理アプリ Ver.1.0.2（ローカル保存・オフライン動作）</span>
+    <span class="tana-footer-note">本アプリの棚卸表は決算・記録保存のための補助資料です。</span>
+  </footer>
+</div>
+
+<!-- 印刷専用領域（アプリ本体とは独立） -->
+<div id="tana-print-root" aria-hidden="true"></div>
+
+<!-- 共通モーダル -->
+<div id="tana-modal-overlay" class="tana-modal-overlay" hidden>
+  <div class="tana-modal" role="dialog" aria-modal="true">
+    <div class="tana-modal-head">
+      <h2 id="tana-modal-title"></h2>
+      <button type="button" class="tana-modal-close" id="tana-modal-close" aria-label="閉じる">×</button>
+    </div>
+    <div class="tana-modal-body" id="tana-modal-body"></div>
+    <div class="tana-modal-foot" id="tana-modal-foot"></div>
+  </div>
+</div>
+
+<!-- トースト -->
+<div id="tana-toast-wrap" class="tana-toast-wrap"></div>
+
+<script src="js/tana-util.js"></script>
+<script src="js/tana-store.js"></script>
+<script src="js/tana-calc.js"></script>
+<script src="js/tana-dashboard.js"></script>
+<script src="js/tana-master.js"></script>
+<script src="js/tana-inventory.js"></script>
+<script src="js/tana-years.js"></script>
+<script src="js/tana-output.js"></script>
+<script src="js/tana-settings.js"></script>
+<script src="js/tana-app.js"></script>
+</body>
+</html>
